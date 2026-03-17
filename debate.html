@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>InsightDebate</title>
+  <meta name="description" content="Responsive HTML5 Template">
+  <meta name="author" content="webthemez">
+
+  <!-- Mobile Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style2.css">
+
+  
+  
+</head>
+
+<body onload="f1()">
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <!-- <span class="close">&times;</span> -->
+      <p class="p11">Choose the on which behalf you want to talk....</p>
+      <button class="af" id="af1"> Affirmative</button>
+      <button class="ne" id="ne1"> Negative</button>
+    </div>
+  
+  </div>
+
+ 
+
+
+
+
+  <div class="heading">
+    <p><h1>Discussion panel</h1></p>
+    <p><h2>given topic</h2></p>
+  </div>
+  <div class="debate_layout">
+    <div class="agree" style="background-color: rgba(243, 241, 241, 0.995);">
+      <div class="favour">
+        <p> Affirmative</p>
+        <form action="">
+          <label>vote</label>
+          <input type="checkbox" name="vote" id="vote">
+        </form>
+              
+      </div>
+      <div class="cont"> Comments
+       
+       <p></p>
+       <p></p>
+       <p></p>
+       <p></p>
+       <p></p>
+       <p></p>
+
+
+      </div>
+      <div class="comment-layout1" id="comm1">
+        <div style="padding-bottom: 2%;"><label style="font-size: 25px;">Comment</label></div>
+         <div>
+          <form action="">
+          <textarea id="comment" name="comment" class="comm-infavor"></textarea>
+         <!-- <input type="text" class="" id="comm-infavor"> -->
+         <button onclick="addComment()">Add Comment</button>
+        </form>
+        </div>
+       </div>
+    </div>
+    <script>
+
+  async function addComment() {
+      const user = document.getElementById('af1').value;
+      const comment = document.getElementById('comment').value;
+      const response = await fetch('server.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ user, comment })
+      });
+      if (response.ok) {
+          fetchComments();
+          document.getElementById('user').value = '';
+          document.getElementById('comment').value = '';
+      } else {
+          const errorData = await response.json();
+          alert(errorData.message || 'Failed to add comment');
+      }
+  }
+
+  fetchComments();
+</script>             
+
+
+    <div class="disagree" style="background-color: rgba(243, 241, 241, 0.995); margin-left: 20px;">
+       <div class="favour">
+        <p> Negative</p>
+        <div id="v1">
+          <form action="">
+            <label>vote</label>
+            <input type="checkbox" name="vote" id="vote">
+          </form>
+        </div>
+        
+      </div>
+       <div class="cont">Comments
+
+       <p></p>
+       <p></p>
+       <p></p>
+       <p></p>
+       <p></p>
+       <p></p>
+
+
+
+       </div>
+       <div class="comment-layout2" id="comm2">
+        <div style="padding-bottom: 2%;"><label style="font-size: 25px;">Comment</label></div>
+         <div>
+          <form action="">
+          <textarea id="comment" name="comment" class="comm-infavor"></textarea>
+         <!-- <input type="text" class="" id="comm-infavor"> -->
+          <button class="btn6">post</button>
+        </form>
+        </div>
+       </div>
+    </div>
+  </div>
+
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+    <script>
+      
+      var modal = document.getElementById("myModal");
+      
+     
+      var span = document.getElementsByClassName("close")[0];
+
+      var af=document.getElementById("af1");
+      var ne=document.getElementById("ne1");
+
+
+
+      var comm1=document.getElementById("comm1");
+      var comm2=document.getElementById("comm2");
+      
+      // When the user clicks the button, open the modal 
+      function f1() {
+        modal.style.display = "block";
+      }
+      
+      
+      
+      af.onclick=function(){
+        modal.style.display="none";
+        comm2.style.display="none";
+        
+      }
+
+      ne.onclick=function(){
+        modal.style.display="none";
+        comm1.style.display="none";
+      }
+
+
+      </script>
+      <script type="text/javascript" src="js/script.js"></script>
+      <script type="text/javascript" src="js/script2.js"></script>
+      
+</body>
+</html>
